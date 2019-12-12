@@ -54,7 +54,7 @@ def getgameids(filename):
 
 def getgamereviews(ids, timeout, maxretries, pause, out):
     urltemplate = string.Template(
-        'http://store.steampowered.com//appreviews/$id?start_offset=$offset&filter=recent&language=english')
+        'http://store.steampowered.com//appreviews/$id?start_offset=$offset&filter=recent&language=tchinese')
     endre = re.compile(r'({"success":2})|(no_more_reviews)')
 
     for (dir, id_, name) in ids:
@@ -96,6 +96,8 @@ def getgamereviews(ids, timeout, maxretries, pause, out):
                         break
                     f.write(htmlpage)
                 offset += step
+                if offset == 3000:
+                    break
         with open(donefilename, 'w', encoding='utf-8') as f:
             pass
 
