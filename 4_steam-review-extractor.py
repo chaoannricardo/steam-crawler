@@ -139,8 +139,7 @@ def extract_reviews(basepath, outputfile_name):
                     new_df.to_csv("./data/reviews_final.csv", header=True, index=None, encoding='utf-8')
                 else:
                     new_df.to_csv("./data/reviews_final.csv", header=None, index=None, mode='a', encoding='utf-8')
-                new_df = pd.DataFrame()
-                new_df.to_csv("./data/reviews.csv", index=None, header=None)
+                os.remove("./data/reviews.csv")
             except pd.errors.EmptyDataError:
                 print('Review data is empty')
 
