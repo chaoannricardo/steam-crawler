@@ -139,7 +139,19 @@ def extract_reviews(basepath, outputfile_name):
                     new_df.to_csv("./data/reviews_final.csv", header=True, index=None, encoding='utf-8')
                 else:
                     new_df.to_csv("./data/reviews_final.csv", header=None, index=None, mode='a', encoding='utf-8')
-                os.remove("./data/reviews.csv")
+                new_df = pd.DataFrame({
+                    'game_id': [],
+                    'useful_num': [],
+                    'funny_num': [],
+                    'user_name': [],
+                    'games_owned': [],
+                    'reviews_written': [],
+                    'recommended': [],
+                    'hours_played': [],
+                    'review_date': [],
+                    'text': []
+                })
+                new_df.to_csv("./data/reviews.csv", header=None, index=None)
             except pd.errors.EmptyDataError:
                 print('Review data is empty')
 
