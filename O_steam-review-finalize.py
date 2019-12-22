@@ -4,7 +4,7 @@ import pandas as pd
 if __name__ == '__main__':
     # pandas option set
     pd.options.display.max_colwidth = 100000000
-    temp_data = pd.read_csv("./data/reviews_final.csv", encoding='utf-8')
+    temp_data = pd.read_csv("./data/reviews.csv", encoding='utf-8')
     new_df = pd.DataFrame({
         'game_id': temp_data.iloc[:, 0],
         'useful_num': temp_data.iloc[:, 1],

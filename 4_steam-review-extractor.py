@@ -116,44 +116,30 @@ def extract_reviews(basepath, outputfile_name):
                                 (id_, helpful, funny, username, owned, numrev, recco, time, posted, content))
                     except UnboundLocalError:
                         print(outputfile_name, " is a blank file, skipped.")
-            # check if duplicate rows in every loop
-            try:
-                # read in temp reviews data
-                temp_data = pd.read_csv("./data/reviews.csv", header=None, encoding='utf-8')
-                new_df = pd.DataFrame({
-                    'game_id': temp_data.iloc[:, 0],
-                    'useful_num': temp_data.iloc[:, 1],
-                    'funny_num': temp_data.iloc[:, 2],
-                    'user_name': temp_data.iloc[:, 3],
-                    'games_owned': temp_data.iloc[:, 4],
-                    'reviews_written': temp_data.iloc[:, 5],
-                    'recommended': temp_data.iloc[:, 6],
-                    'hours_played': temp_data.iloc[:, 7],
-                    'review_date': temp_data.iloc[:, 8],
-                    'text': temp_data.iloc[:, 9]
-                })
-                new_df.drop_duplicates(subset=['user_name', 'text'], keep='first', inplace=True)
-                # append to the final csv file
-                dir_list = os.listdir('./data/')
-                if 'reviews_final.csv' not in dir_list:
-                    new_df.to_csv("./data/reviews_final.csv", header=True, index=None, encoding='utf-8')
-                else:
-                    new_df.to_csv("./data/reviews_final.csv", header=None, index=None, mode='a', encoding='utf-8')
-                new_df = pd.DataFrame({
-                    'game_id': [],
-                    'useful_num': [],
-                    'funny_num': [],
-                    'user_name': [],
-                    'games_owned': [],
-                    'reviews_written': [],
-                    'recommended': [],
-                    'hours_played': [],
-                    'review_date': [],
-                    'text': []
-                })
-                new_df.to_csv("./data/reviews.csv", header=None, index=None)
-            except pd.errors.EmptyDataError:
-                print('Review data is empty')
+                '''
+                # check if duplicate rows in every loop
+                try:
+                    # read in temp reviews data
+                    temp_data = pd.read_csv("./data/reviews.csv", header=None, encoding='utf-8')
+                    new_df = pd.DataFrame({
+                        'game_id': temp_data.iloc[:, 0],
+                        'useful_num': temp_data.iloc[:, 1],
+                        'funny_num': temp_data.iloc[:, 2],
+                        'user_name': temp_data.iloc[:, 3],
+                        'games_owned': temp_data.iloc[:, 4],
+                        'reviews_written': temp_data.iloc[:, 5],
+                        'recommended': temp_data.iloc[:, 6],
+                        'hours_played': temp_data.iloc[:, 7],
+                        'review_date': temp_data.iloc[:, 8],
+                        'text': temp_data.iloc[:, 9]
+                    })
+                    new_df.drop_duplicates(subset=['user_name', 'text'], keep='first', inplace=True)
+                    # modify reviews data to ensure there is no duplicate rows
+                    new_df.to_csv("./data/reviews.csv", header=True, index=None, encoding='utf-8')
+                    new_df = pd.DataFrame()
+                except pd.errors.EmptyDataError:
+                    print('Review data is empty')
+                '''
 
 
 def main():
