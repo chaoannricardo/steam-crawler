@@ -40,7 +40,7 @@ def extract_reviews(basepath, outputfile_name):
     # pandas option set
     pd.options.display.max_colwidth = 100000000
     with open(outputfile_name, mode="w", encoding="utf-8", newline="") as outputfile:
-        writer = csv.writer(outputfile)
+        # writer = csv.writer(outputfile)
         for root, _, files in os.walk(basepath):
             m = idre.search(root)
             if m:
@@ -49,6 +49,7 @@ def extract_reviews(basepath, outputfile_name):
                 print('skipping non-game path ', root, file=sys.stderr)
                 continue
             for file in files:
+                writer = csv.writer(outputfile)
                 fullpath = os.path.join(root, file)
                 print('processing', fullpath)
                 
@@ -140,7 +141,9 @@ def extract_reviews(basepath, outputfile_name):
                                 (id_, helpful, funny, username, owned, numrev, recco, time, posted, content))
                     except UnboundLocalError:
                         print(outputfile_name, " is a blank file, skipped.")
+                
                 '''
+                    del writer
                 # check if duplicate rows in every loop
                 try:
                     # read in temp reviews data
