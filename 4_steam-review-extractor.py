@@ -53,6 +53,7 @@ def extract_reviews(basepath, outputfile_name):
                 fullpath = os.path.join(root, file)
                 print('processing', fullpath)
                 
+                '''
                 # check if duplicate rows in every loop
                 try:
                     # read in temp reviews data
@@ -75,7 +76,8 @@ def extract_reviews(basepath, outputfile_name):
                     new_df = pd.DataFrame()
                 except pd.errors.EmptyDataError:
                     print('Review data is empty')
-                
+                '''
+
                 with open(fullpath, encoding='utf8') as f:
                     try:
                         soup = BeautifulSoup(json.loads(f.read())['html'], "html.parser")
