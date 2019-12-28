@@ -107,7 +107,7 @@ def crawling(name):
 
 if __name__ == '__main__':
     pd.options.display.max_colwidth = 100000000
-    driver = webdriver.Firefox(executable_path='./geckodriver.exe')
+    driver = webdriver.Firefox(executable_path='./geckodriver')
 
     # Left 4 dead 2
     html = 'https://steamcommunity.com/app/550/reviews/?browsefilter=toprated&snr=1_5_100010_&filterLanguage=tchinese'
