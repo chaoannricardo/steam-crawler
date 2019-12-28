@@ -81,7 +81,7 @@ def crawling(name):
             real_games_count_list.append(temp_text)
         # create temp data
         temp_data = pd.DataFrame({
-            'name': [name * len(real_helpful_list)],
+            'name': [name] * len(real_helpful_list),
             'useful_num': real_helpful_list,
             'funny_num': funny_list,
             'games_owned': real_games_count_list,
@@ -107,7 +107,7 @@ def crawling(name):
 
 if __name__ == '__main__':
     pd.options.display.max_colwidth = 100000000
-    driver = webdriver.Firefox(executable_path='./geckodriver')
+    driver = webdriver.Firefox(executable_path='./geckodriver.exe')
 
     # Left 4 dead 2
     html = 'https://steamcommunity.com/app/550/reviews/?browsefilter=toprated&snr=1_5_100010_&filterLanguage=tchinese'
