@@ -81,7 +81,7 @@ def crawling(name):
             real_games_count_list.append(temp_text)
         # create temp data
         temp_data = pd.DataFrame({
-            'name': name,
+            'name': [name * len(real_helpful_list)],
             'useful_num': real_helpful_list,
             'funny_num': funny_list,
             'games_owned': real_games_count_list,
