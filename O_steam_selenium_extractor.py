@@ -20,21 +20,21 @@ def set_re_rules():
 
 
 def crawling(name):
+    # reference:
+    # https://stackoverflow.com/questions/20986631/how-can-i-scroll-a-web-page-using-selenium-webdriver-in-python
+    scroll_pause_time = 3
+    # Get scroll height
+    last_height = driver.execute_script("return document.body.scrollHeight")
     while True:
-        # Get scroll height
-        # reference: https://stackoverflow.com/questions/20986631/how-can-i-scroll-a-web-page-using-selenium-webdriver-in-python
-        last_height = driver.execute_script("return document.body.scrollHeight")
         # Scroll down to bottom
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         # Wait to load page
-        scroll_pause_time = 3
         time.sleep(scroll_pause_time)
         # Calculate new scroll height and compare with last scroll height
         new_height = driver.execute_script("return document.body.scrollHeight")
         if new_height == last_height:
             break
         last_height = new_height
-
 
     # tackle helpful list
     helpful_list = driver.find_elements_by_css_selector(".found_helpful")
@@ -61,6 +61,7 @@ def crawling(name):
             else:
                 split_list = j.text.split(" ")
                 real_helpful_list.append(split_list[0])
+
     # tackle recommend list
     rec_list = driver.find_elements_by_css_selector(".title")
     real_recommend_list = []
@@ -69,30 +70,43 @@ def crawling(name):
             real_recommend_list.append("1")
         elif j.text == "不推薦":
             real_recommend_list.append("-1")
+
     # tackle posted list
     posted_list = driver.find_elements_by_css_selector(".date_posted")
     real_posted_list = []
     for i, j in enumerate(posted_list):
         temp_text = j.text.replace("張貼於：", "").replace("年", "/").replace("月", "/").replace("日", "").replace(" ", "")
         real_posted_list.append(temp_text)
+
     # tackle gaming hours
     gaming_hours = driver.find_elements_by_css_selector(".hours")
     real_gaming_hours = []
     for i, j in enumerate(gaming_hours):
         temp_text = j.text.replace("總時數 ", "").replace(" 小時", "")
         real_gaming_hours.append(temp_text)
+
     # tackle review text
     review_list = driver.find_elements_by_css_selector(".apphub_CardTextContent")
     real_review_list = []
     for i, j in enumerate(review_list):
         real_review_list.append(j.text)
+
     # tackle games count
     games_count = driver.find_elements_by_css_selector(".apphub_CardContentMoreLink")
     real_games_count_list = []
     for i, j in enumerate(games_count):
         temp_text = j.text.replace("此帳戶擁有 ", "").replace(" 款產品", "")
         real_games_count_list.append(temp_text)
+
     # create temp data
+    print(len(real_helpful_list))
+    print(len(funny_list))
+    print(len(real_games_count_list))
+    print(len(real_recommend_list))
+    print(len(real_gaming_hours))
+    print(len(real_posted_list))
+    print(len(real_review_list))
+
     temp_data = pd.DataFrame({
         'name': [name] * len(real_helpful_list),
         'useful_num': real_helpful_list,
@@ -103,14 +117,16 @@ def crawling(name):
         'review_date': real_posted_list,
         'text': real_review_list
     })
+
     # append process
-    temp_data.to_csv("./data/reviews.csv", mode='a', header=False, encoding='utf8', index=None)
+    temp_data.to_csv("./data/reviews.csv", header=True, encoding='utf8', index=None)
 
 
 if __name__ == '__main__':
     pd.options.display.max_colwidth = 100000000
-    driver = webdriver.Firefox(executable_path='./geckodriver')
+    driver = webdriver.Firefox(executable_path='./geckodriver.exe')
 
+    '''
     # Left 4 dead 2
     html = 'https://steamcommunity.com/app/550/reviews/?browsefilter=toprated&snr=1_5_100010_&filterLanguage=tchinese'
     driver.get(html)
@@ -118,8 +134,8 @@ if __name__ == '__main__':
     elem = driver.find_element_by_css_selector("#age_gate_btn_continue span")
     elem.click()
     crawling("Left 4 Dead 2")
+    
 
-    '''
     # Gears 5
     html = 'https://steamcommunity.com/app/1097840/reviews/?browsefilter=toprated&snr=1_5_100010_&filterLanguage=tchinese'
     driver.get(html)
@@ -127,6 +143,7 @@ if __name__ == '__main__':
     elem = driver.find_element_by_css_selector("#age_gate_btn_continue span")
     elem.click()
     crawling("Gears 5")
+    
 
     # DEAD OR ALIVE 6
     html = 'https://steamcommunity.com/app/838380/reviews/?browsefilter=toprated&snr=1_5_100010_&filterLanguage=tchinese'
@@ -140,11 +157,9 @@ if __name__ == '__main__':
     html = 'https://steamcommunity.com/app/4000/reviews/?browsefilter=toprated&snr=1_5_100010_&filterLanguage=tchinese'
     driver.get(html)
     crawling("Garry's Mod")
+    '''
 
     # 真・三國無雙８
     html = 'https://steamcommunity.com/app/730310/reviews/?browsefilter=toprated&snr=1_5_100010_&filterLanguage=tchinese'
     driver.get(html)
     crawling("真・三國無雙８")
-    '''
-
-
