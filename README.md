@@ -4,13 +4,13 @@
 
 The repository is forked from the original branch by [aesuli](https://github.com/aesuli)/**[steam-crawler](https://github.com/aesuli/steam-crawler)** 
 
-Within this edition, several editions and add-ons was made, which includes, 0_view_data.py, 7_steam-review-check-duplicate.py, 8_steam-selenium-extractor.py, 9_steam-check-website-condition.py. 
+Within this edition, several editions and add-ons are made, which include revisions of, 0_view_data.py, 4_steam-review-extractor.py, 7_steam-review-check-duplicate.py, 8_steam-selenium-extractor.py, 9_steam-check-website-condition.py. 
 
-Further introduction of the mentioned codes are written below.
+Further details of the repository are written below.
 
 <br/>
 
-## Original README.md Documentation
+## Further Details of the Code
 This set of scripts crawls STEAM website to download game reviews.
 
 These scripts are aimed at students that want to experiment with text mining on review data.
