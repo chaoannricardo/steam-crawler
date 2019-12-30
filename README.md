@@ -2,7 +2,13 @@
 
 ## Introduction
 
+The repository is forked from the original branch by [aesuli](https://github.com/aesuli)/**[steam-crawler](https://github.com/aesuli/steam-crawler)** 
 
+Within this edition, several editions and add-ons was made, which includes, 0_view_data.py, 7_steam-review-check-duplicate.py, 8_steam-selenium-extractor.py, 9_steam-check-website-condition.py. 
+
+Further introduction of the mentioned codes are written below.
+
+Noted that 
 
 <br/>
 
@@ -13,15 +19,15 @@ These scripts are aimed at students that want to experiment with text mining on 
 
 The script have an order of execution.
 
-  * _steam-game-crawler.py_ download pages that lists games into ./data/games/
+  * **1_steam-game-crawler.py** download pages that lists games into ./data/games/
 
-  * _steam-game-extractor.py_ extracts games ids from the downloaded pages, saving them into ./data/games.csv
+  * **2_steam-game-extractor.py** extracts games ids from the downloaded pages, saving them into ./data/games.csv
   
-  * _steam-review-crawler.py_ uses the above list to download game reviews pages into ./data/reviews
-  This process can take a long time (it's a lot of data and the script sleeps between requests to be fair with the server).
-  When the script is stopped and restarted it will skip games for which all reviews have been downloaded on the previous run (it does not downloads new reviews for such games).
+  * **3_steam-review-crawler.py** uses the above list to download game reviews pages into ./data/reviews
+    This process can take a long time (it's a lot of data and the script sleeps between requests to be fair with the server).
+    When the script is stopped and restarted it will skip games for which all reviews have been downloaded on the previous run (it does not downloads new reviews for such games).
   
-  * _steam-review-extractor.py_ extracts reviews and other info from the downloaded pages, saving them into ./data/reviews.csv 
+  * **4_steam-review-extractor.py** extracts reviews and other info from the downloaded pages, saving them into ./data/reviews.csv 
 
 Column in the reviews.csv file:
   * game id
@@ -34,7 +40,7 @@ Column in the reviews.csv file:
   * hours played by the reviewer on the game
   * date of creation of the review
   * text of the review
-  
+
 The last script _steam-reviews-stats.py_ is a sample script that processes the review.csv file and outputs some basic info and stats in json files:
 
   * _./data/games.json_ number of reviews and played hours for every game.
@@ -42,7 +48,7 @@ The last script _steam-reviews-stats.py_ is a sample script that processes the r
   * _./data/users.json_ number of game owned (as reported by user's badge on STEAM) and number of played hours.
   
   * _./data/summary.json_ number of reviews, number of played hours, number of users, number of games.
-  
+
 On March 15, 2018 those last statistics are:
 
 ```
@@ -51,4 +57,4 @@ played hours 554702535
 users          2720777
 games            26677
 ```
-  
+
