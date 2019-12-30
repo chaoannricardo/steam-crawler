@@ -29,6 +29,14 @@ The script have an order of execution.
   
   * **4_steam-review-extractor.py** extracts reviews and other info from the downloaded pages, saving them into ./data/reviews.csv 
 
+  * **5_steam-reviews-stats.py**  is a sample script that processes the review.csv file and outputs some basic info and stats in json files.
+
+  * **6_steam-review-check-duplicate.py** checks whether there are duplicated rows in the crawled data, and removing all while keeping the first record of them.
+
+  * **7_steam-selenium-extractor.py** extracts traditional chinese review data of  given steam website, the process is facilitated by selenium package.
+
+  * **8_steam-check-website-condition.py** check whether the game-id exists and would export a csv file which includes the games-id of those are valid.
+
 Column in the reviews.csv file:
   * game id
   * number of people that found the review to be useful
