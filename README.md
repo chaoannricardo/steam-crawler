@@ -8,8 +8,6 @@ Within this edition, several editions and add-ons was made, which includes, 0_vi
 
 Further introduction of the mentioned codes are written below.
 
-Noted that 
-
 <br/>
 
 ## Original README.md Documentation
